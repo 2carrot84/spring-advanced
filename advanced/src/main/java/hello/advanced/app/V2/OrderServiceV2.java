@@ -21,7 +21,7 @@ public class OrderServiceV2 {
 			orderRepository.save(status.getTraceId(), itemId);
 			trace.end(status);
 		} catch (Exception e) {
-			trace.exeception(status, e);
+			trace.exception(status, e);
 			throw e;
 		}
 	}

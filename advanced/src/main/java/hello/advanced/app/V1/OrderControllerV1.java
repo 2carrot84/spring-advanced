@@ -22,7 +22,7 @@ public class OrderControllerV1 {
 			trace.end(status);
 			return "ok";
 		} catch (Exception e) {
-			trace.exeception(status, e);
+			trace.exception(status, e);
 			throw e;
 		}
 	}

@@ -1,15 +1,15 @@
-package hello.advanced.app.V1;
+package hello.advanced.app.V3;
 
 import org.springframework.stereotype.Repository;
 
 import hello.advanced.trace.TraceStatus;
-import hello.advanced.trace.hellotrace.HelloTraceV1;
+import hello.advanced.trace.logtrace.LogTrace;
 import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class OrderRepositoryV1 {
-	private final HelloTraceV1 trace;
+public class OrderRepositoryV3 {
+	private final LogTrace trace;
 
 	public void save(String itemId) {
 		TraceStatus status = null;

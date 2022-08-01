@@ -26,7 +26,7 @@ public class HelloTraceV1 {
 		complete(status, null);
 	}
 
-	public void exeception(TraceStatus status, Exception e) {
+	public void exception(TraceStatus status, Exception e) {
 		complete(status, e);
 	}
 

@@ -19,7 +19,7 @@ class HelloTraceV2Test {
 		HelloTraceV2 trace = new HelloTraceV2();
 		TraceStatus status = trace.begin("hello");
 		TraceStatus status1 = trace.beginSync(status.getTraceId(), "hello2");
-		trace.exeception(status1, new IllegalStateException());
-		trace.exeception(status, new IllegalStateException());
+		trace.exception(status1, new IllegalStateException());
+		trace.exception(status, new IllegalStateException());
 	}
 }
