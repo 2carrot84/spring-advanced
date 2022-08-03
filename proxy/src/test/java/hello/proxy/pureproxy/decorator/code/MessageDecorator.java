@@ -15,7 +15,6 @@ public class MessageDecorator implements Component {
 		log.info("MessageDecorator 실행");
 
 		String result = component.operateion();
-		String decoResult = "*****" + result + "*****";
-		return decoResult;
+		return "*****" + result + "*****";
 	}
 }
