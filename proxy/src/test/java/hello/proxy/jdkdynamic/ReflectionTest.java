@@ -1,6 +1,5 @@
 package hello.proxy.jdkdynamic;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ public class ReflectionTest {
 
 	@Test
 	void reflection1() throws Exception{
-		Class classHello = Class.forName("hello.proxy.jdkdynamic.ReflectionTest$HelloHello");
+		Class<?> classHello = Class.forName("hello.proxy.jdkdynamic.ReflectionTest$HelloHello");
 
 		Hello target = new Hello();
 		Method methodCallA = classHello.getMethod("callA");
