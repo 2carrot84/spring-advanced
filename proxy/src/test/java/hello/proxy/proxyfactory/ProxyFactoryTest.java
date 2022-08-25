@@ -48,7 +48,6 @@ public class ProxyFactoryTest {
 		assertThat(AopUtils.isJdkDynamicProxy(proxy)).isFalse();
 		assertThat(AopUtils.isCglibProxy(proxy)).isTrue();
 	}
-
 	@Test
 	@DisplayName("ProxyTargetClass 옵션을 사용하면 인터페이스가 있어도, CGLIB을 사용하고, 클래스 기반 프록시 사용")
 	void proxyTargetClass() {
