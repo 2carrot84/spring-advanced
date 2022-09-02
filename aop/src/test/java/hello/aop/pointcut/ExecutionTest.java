@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 
+import hello.aop.member.MemberService;
 import hello.aop.member.MemberServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
@@ -89,6 +90,64 @@ public class ExecutionTest {
 	@Test
 	void pacakageMatchSubPackage2() {
 		pointcut.setExpression("execution(* hello.aop..*.*(..))");
+		Assertions.assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+	}
+
+	@Test
+	void typeExactMatch() {
+		pointcut.setExpression("execution(* hello.aop.member.MemberServiceImpl.*(..))");
+		Assertions.assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+	}
+
+	@Test
+	void typeMatchSuperType() {
+		pointcut.setExpression("execution(* hello.aop.member.MemberService.*(..))");
+		Assertions.assertThat(pointcut.matches(helloMethod, MemberService.class)).isTrue();
+	}
+
+	@Test
+	void typeMatchInternal() throws NoSuchMethodException {
+		pointcut.setExpression("execution(* hello.aop.member.MemberServiceImpl.*(..))");
+
+		Method internalMethod = MemberServiceImpl.class.getMethod("internal", String.class);
+		Assertions.assertThat(pointcut.matches(internalMethod, MemberServiceImpl.class)).isTrue();
+	}
+
+	@Test
+	void typeMatchNoSuperTypeMethodFalse() throws NoSuchMethodException {
+		pointcut.setExpression("execution(* hello.aop.member.MemberService.*(..))");
+
+		Method internalMethod = MemberServiceImpl.class.getMethod("internal", String.class);
+		Assertions.assertThat(pointcut.matches(internalMethod, MemberService.class)).isFalse();
+	}
+
+	@Test
+	void argsMatch() {
+		pointcut.setExpression("execution(* *(String))");
+		Assertions.assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+	}
+
+	@Test
+	void argsMatchNoArgs() {
+		pointcut.setExpression("execution(* *())");
+		Assertions.assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
+	}
+
+	@Test
+	void argsMatchStar() {
+		pointcut.setExpression("execution(* *(*))");
+		Assertions.assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+	}
+
+	@Test
+	void argsMatchAll() {
+		pointcut.setExpression("execution(* *(..))");
+		Assertions.assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+	}
+
+	@Test
+	void argsMatchComplex() {
+		pointcut.setExpression("execution(* *(String, ..))");
 		Assertions.assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
 	}
 }
